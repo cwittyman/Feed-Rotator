@@ -1,0 +1,6 @@
+#basic-feed { font-family: Helvetica, Arial, sans-serif; margin: 0px; border: 1px solid #666; overflow: hidden; width: 750px; height: 25px; }
+#basic-feed .newsfeed-item { /* display: none; */ overflow: hidden; height: 25px; }
+#basic-feed .title { display: block; float: left; width: 90px; font-size: 12px; line-height: 20px; padding: 3px 20px 6px 7px; background: #666; font-weight: bold; white-space: nowrap; overflow: hidden; }
+#basic-feed .feed-content { display: block; float: left; width: 620px; font-size: 12px; line-height: 20px; padding: 3px 5px 6px 5px; position: relative; }
+#basic-feed .feed-content a { border: none; font-weight: bold; white-space: nowrap; }
+
