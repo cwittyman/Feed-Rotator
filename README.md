@@ -13,6 +13,7 @@ Requirements
 --------------------------------------
 This plugin was developed on jQuery 1.7.1. Other versions may work, but have not been tested!
 
+The plugin also makes use of the jQuery plugin [jGFeed](http://archive.plugins.jquery.com/project/jgfeed), which has been included for convenience in retrieving content from XML and JSON feeds.
 
 Basic Usage
 --------------------------------------
