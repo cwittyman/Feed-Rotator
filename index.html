@@ -157,9 +157,14 @@
 				<li><span class="title">Animation Effects</span>: (<a href="#" class="expand-list">Expand</a>)
 					<ul>
 						<li>
-							<strong>Duration</strong> - The amount of time it takes for the element to slide out or back in. (By default, it takes 1200ms to slide out, and another 1200ms to slide back in.<br />
+							<strong>Transition Time</strong> - The amount of time it takes for the text to be replaced. (By default, it takes 2 seconds to fully rotate in the next line of text.)<br />
 							<em>(Unit of Measure: ms, Expected: Integer)</em>
-							<pre>duration: 1200</pre>
+							<pre>transitionTime: 2000</pre>
+						</li>
+						<li>
+							<strong>Transition Wait Time</strong> - The amount of time after the rotation animation stops before the next begins.<br />
+							<em>(Unit of Measure: ms, Expected: Integer)</em>
+							<pre>autoSlideTimeout: 5000</pre>
 						</li>
 						<li>
 							<strong>Easing</strong> - Easing function to use for the animation. (Currently, this has not been tested to see if it works with jQuery UI Easing, but there's no real reason it shouldn't.)<br />
@@ -167,19 +172,9 @@
 							<pre>slideEasing: 'linear'</pre>
 						</li>
 						<li>
-							<strong>Animation Overflow</strong> - The slides will animate this many pixels outside the container, allowing a small window of time that no slides are visible during the animation time.<br />
-							<em>(Unit of Measure: px, Expected: Integer)</em>
-							<pre>slideOutOverflow: 40</pre>
-						</li>
-						<li>
-							<strong>Auto Slide</strong> - Should the slider automatically trigger the slide animation periodically? (The auto slide functionality will be paused if a user hovers over the slider container.)<br />
-							<em>(Expected: Boolean)</em>
-							<pre>autoSlide: false</pre>
-						</li>
-						<li>
-							<strong>Auto Slide Wait Time</strong> - The amount of time after the slide animation stops before the next begins, when Auto Slide is active.<br />
-							<em>(Unit of Measure: ms, Expected: Integer)</em>
-							<pre>autoSlideTimeout: 4000</pre>
+							<strong>Animation Direction</strong> - Whether the text slides 'up' out of the container toward the top (default), or 'down' toward the bottom.<br />
+							<em>(Expected: String)</em>
+							<pre>autoRotateDirection: 'up'</pre>
 						</li>
 					</ul>
 				</li>
