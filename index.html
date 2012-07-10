@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Split Slider - jQuery Slider</title>
+	<title>Feed Rotator - jQuery News Feed Rotator</title>
 	<link rel="icon" href="http://www.thinkpyxl.com/favicon.ico" />
 	<link rel="shortcut icon" href="http://www.thinkpyxl.com/favicon.ico" />
 
 	<link href="css/pagestyles.css" rel="stylesheet" type="text/css" />
-	<link href="css/jquery.split-slider.css" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.feed-rotator.css" rel="stylesheet" type="text/css" />
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<script src="js/jquery.split-slider.js" type="text/javascript"></script>
+	<script src="js/jquery.feed-rotator.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
 (function($) {
 	$(function() {
-	// Example initializer for Split Slider
-		mySlider = $("#split-slider-demo").splitSlider({
-			leftArrow: 'images/arrow_left.jpg',
-			rightArrow: 'images/arrow_right.jpg'
+	// Example initializer for Feed Rotator
+		basicNewsFeed = $('#basic-feed').feedRotator({
+			fetchData: true,
+			feedUrl: 'http://feeds.feedburner.com/jQueryHowto',
+			dataType: 'xml',
+			feedContent: 'contentSnippet'
 		});
+		simpleNewsFeed = $('#simple-feed').feedRotator();
 	// End example initializer for Split Slider
 		$(".expand-list").click(function(e) {
 			e.preventDefault();
 			$(this).parent().find(">ul").slideToggle();
-		});
-		$("#enable-auto-slide").click(function(e) {
-			e.preventDefault();
-			mySlider.autoSlide();
-			$(this).hide();
-			$("#disable-auto-slide").show();
-		});
-		$("#disable-auto-slide").click(function(e) {
-			e.preventDefault();
-			mySlider.autoSlide(false);
-			$(this).hide();
-			$("#enable-auto-slide").show();
 		});
 	});
 })(jQuery);
@@ -48,83 +39,118 @@
 	</nav>
 	<section class="content">
 		<section class="main-content">
-			<h1>Split Slider Demo</h1>
-			<div id="split-slider-demo">
-				<div class="middle-slide">
-					<img src="http://dummyimage.com/164x220/ededed/000.png&text=Split+Slider+Demo" alt="" />
-				</div>
-				<ul class="slides">
-					<li><img src="http://dummyimage.com/164x220/e6e6e6/000.png" alt="" /></li>
-					<li><img src="http://dummyimage.com/164x220/e6e6e6/000.png" alt="" /></li>
-					<li><img src="http://dummyimage.com/164x220/e6e6e6/000.png" alt="" /></li>
-					<li><img src="http://dummyimage.com/164x220/e6e6e6/000.png" alt="" /></li>
-				</ul>
+			<h1>Feed Rotator Demo</h1>
+			<div id="basic-feed">
+
 			</div>
-			<p><a href="#" id="enable-auto-slide">Enable Auto-Slide</a><a href="#" id="disable-auto-slide">Disable Auto-Slide</a></p>
-			<p>This demo of Split Slider was initialized with the following script:</p>
-			<pre>mySlider = $("#split-slider-demo").splitSlider({
-	leftArrow: 'images/arrow_left.jpg',
-	rightArrow: 'images/arrow_right.jpg'
+			<p>This demo of Feed Rotator was initialized with the following script:</p>
+			<pre>basicNewsFeed = $('#basic-feed').feedRotator({
+	fetchData: true,
+	feedUrl: 'http://feeds.feedburner.com/jQueryHowto',
+	dataType: 'xml',
+	feedContent: 'contentSnippet'
 });</pre>
-			<p>The simplest version of the slider can be defined with this call:</p>
-			<pre>$("#split-slider-demo").splitSlider();</pre>
+			<div id="simple-feed">
+				<div class="newsfeed-item">
+					<span class="title">Demo Content</span>
+					<span class="feed-content">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</span>
+				</div>
+				<div class="newsfeed-item">
+					<span class="title">Lorem Demo</span>
+					<span class="feed-content">Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis.</span>
+				</div>
+				<div class="newsfeed-item">
+					<span class="title">Demo Content</span>
+					<span class="feed-content">Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.</span>
+				</div>
+			</div>
+			<p>The simplest version of the feed can be defined with this call:</p>
+			<pre>$('#basic-feed').feedRotator();</pre>
 			<p>This plugin was developed on jQuery 1.7.1.</p>
 			<p>A complete list of all available options follows:</p>
 			<ul class="options-list">
 				<li><span class="title">Defining Your Elements</span>: (<a href="#" class="expand-list">Expand</a>)
 					<ul>
 						<li>
-							<strong>Number of Elements</strong> - The total number of elements to be displayed at a time. This includes the "middle" element, if used, but not the arrows.<br />
-							<em>(Expected: Integer)</em>
-							<pre>numVisible: 5</pre>
+							<strong>Container Class</strong> - The class used by the container of news items. This is set on elements for you, if you pull content from a feed. Otherwise, you should use this class name on the div containing each line of news items.<br />
+							<em>(Expected: String)</em>
+							<pre>itemClass: '.newsfeed-item'</pre>
 						</li>
 						<li>
-							<strong>Show a "Middle" Element</strong> - If you want a static "middle" element, set this to true. Otherwise, set to false.<br />
+							<strong>Title Class</strong> - The class used by the title content. This is set on elements for you, if you pull content from a feed. Otherwise, you should use this class name on the span containing the news items' titles.<br />
+							<em>(Expected: String)</em>
+							<pre>titleClass: '.title'</pre>
+						</li>
+						<li>
+							<strong>Content Class</strong> - The class used by the container of news items. This is set on elements for you, if you pull content from a feed. Otherwise, you should use this class name on the div containing each line of news items.<br />
+							<em>(Expected: String)</em>
+							<pre>contentClass: '.feed-content'</pre>
+						</li>
+						<li>
+							<strong>Visible Item Class</strong> - The class given to the currently visible news item. This is done automatically, but allows for additional styling, if desired.<br />
+							<em>(Expected: String)</em>
+							<pre>currentItem: '.visible-item'</pre>
+						</li>
+					</ul>
+				</li>
+				<li><span class="title">Using a Feed</span>: (<a href="#" class="expand-list">Expand</a>)
+					<ul>
+						<li>
+							<strong>Fetch Data Toggle</strong> - This must be set to <em>true</em> to use the provided Feed URL.<br />
 							<em>(Expected: Boolean)</em>
-							<pre>showMiddle: true</pre>
+							<pre>fetchData: false</pre>
 						</li>
 						<li>
-							<strong>Middle Slide Element</strong> - The element identifier used to find the pre-defined "middle" element. (Currently, this must be a child of the element you call the plugin on.)<br />
+							<strong>Feed URL</strong> - The URL of the news feed. An XML, JSON, or JSONP feed URL should work.<br />
 							<em>(Expected: String)</em>
-							<pre>middleDiv: '.middle-slide'</pre>
+							<pre>feedUrl: 'http://feeds.feedburner.com/jQueryHowto'</pre>
 						</li>
 						<li>
-							<strong>List of Slide Elements</strong> - The identifier of the container element which holds all of the slides as its direct children. (Tested with a &lt;ul&gt; list, but it should work with &lt;div&gt;s as well.)<br />
+							<strong>Data Type</strong> - The type of data to be retrieved from the Feed URL. Should accept one of: 'xml', 'json', 'jsonp', 'script', and 'html'. Currently, 'jsonp' uses $.getJSON() to retrieve the feed, and uses <a href="http://archive.plugins.jquery.com/project/jgfeed" target="_blank">jGFeed</a> otherwise.<br />
 							<em>(Expected: String)</em>
-							<pre>slideList: '.slides'</pre>
+							<pre>dataType: 'jsonp'</pre>
+						</li>
+						<li>Feed "Title"
+							<ul>
+								<li>
+									<strong>Static Title Toggle</strong> - If set to true, "Title" section is defined by the "staticTitle" option. Otherwise, "Title" is defined from the "feedContent" option.<br />
+									<em>(Expected: Boolean)</em>
+									<pre>useStaticTitle: false</pre>
+								</li>
+								<li>
+									<strong>Static Title</strong> - String for the "Title" content, if "useStaticTitle" is <em>true</em>.<br />
+									<em>(Expected: String)</em>
+									<pre>staticTitle: 'Demo Content'</pre>
+								</li>
+								<li>
+									<strong>Feed Title</strong> - The XML Element used to populate the "Title" side of the Feed, if "useStaticTitle" is set to <em>false</em>.<br />
+									<em>(Expected: String)</em>
+									<pre>feedTitle: 'title'</pre>
+								</li>
+							</ul>
+						</li>
+						<li>Feed "Content"
+							<ul>
+								<li>
+									<strong>Feed Content</strong> - The XML Element used to populate the "Content" side of the Feed.<br />
+									<em>(Expected: String)</em>
+									<pre>feedContent: 'summary'</pre>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</li>
-				<li><span class="title">Slide Styles</span>: (<a href="#" class="expand-list">Expand</a>)
+				<li><span class="title">Animation Styles</span>: (<a href="#" class="expand-list">Expand</a>)
 					<ul>
 						<li>
-							<strong>Element Width</strong> - The width of the output &lt;div&gt; elements. This is an inline style provided by the plugin for each ".slide" element.<br />
-							<em>(Unit of Measure: px, Expected: Integer)</em>
-							<pre>width: 168</pre>
+							<strong>Text Line Height</strong> - Text line height, used in combination with container height to ensure that only one line of text is visible at a time.<br />
+							<em>(Expected: Integer)</em>
+							<pre>lineHeight: 20</pre>
 						</li>
 						<li>
-							<strong>Element Height</strong> - The height of the output &lt;div&gt; elements. This is an inline style provided by the plugin for each ".slide" element.<br />
-							<em>(Unit of Measure: px, Expected: Integer)</em>
-							<pre>height: 220</pre>
-						</li>
-						<li>
-							<strong>Border Width</strong> - The total width of left and right side borders on each ".slide" element. No borders are provided by the plugin, but this value will help take into account any borders you provide in your styles. (The default stylesheet provided with this plugin includes a 1px transparent border around all ".slide" elements, and a 1px dotted border between elements [which replaces the transparent border on that side].)<br />
-							<em>(Unit of Measure: px, Expected: Integer)</em>
-							<pre>borderWidth: 2</pre>
-						</li>
-					</ul>
-				</li>
-				<li><span class="title">Navigation Arrows</span>: (<a href="#" class="expand-list">Expand</a>)
-					<ul>
-						<li>
-							<strong>Left Arrow Image</strong> - The relative URL to the image you wish to use for the Left Arrow. (This is placed directly into an image tag, so it should be relative to the HTML page, not the plugin directory.)<br />
-							<em>(Expected: String)</em>
-							<pre>leftArrow: 'arrow_left.png'</pre>
-						</li>
-						<li>
-							<strong>Right Arrow Image</strong> - The relative URL to the image you wish to use for the Right Arrow. (This is placed directly into an image tag, so it should be relative to the HTML page, not the plugin directory.)<br />
-							<em>(Expected: String)</em>
-							<pre>rightArrow: 'arrow_right.png'</pre>
+							<strong>Container Height</strong> - The height of the parent "container" that the plugin is initialized on.<br />
+							<em>(Expected: Integer)</em>
+							<pre>parentHeight: 25</pre>
 						</li>
 					</ul>
 				</li>
@@ -163,41 +189,17 @@
 				<li><span class="title">Features</span>: (<a href="#" class="expand-list">Expand</a>)
 					<ul>
 						<li>
-							<strong>Static Middle Element (optional)</strong>
-							<p>The initial purpose of the script was to have a central element that stayed in one place, with an even number of items on either side which slide outward and off the page, to be replaced with the next set of items.</p>
+							<strong>News Feed with Rotating Content</strong>
+							<p>The initial purpose of the plugin was to have a Title and Content section, with the Title staying with its respective Content, while being able to rotate through multiple lines of Content text.</p>
 						</li>
 						<li>
-							<strong>Even or Odd Amount of Elements</strong>
-							<p>The tasks handled by the plugin soon grew to include being able to move all elements (half, rounded up, on the left; half, rounded down, on the right).</p>
-							<p>With this in place, we further allowed an even number of elements to be displayed. In this case, half of the items go in each direction.</p>
-						</li>
-						<li>
-							<strong>Auto-Slide</strong>
-							<p>Because, after all, what jQuery Slider plugin is ever complete without automatic sliding as an option?!</p>
+							<strong>Static or Feed-Driven Content</strong>
+							<p>The requirements initially included only content pulled from a back-end language, such as PHP or C# .NET - which quickly grew to include JSON and XML feeds.</p>
+							<p>The plugin is now able to accomodate most content, with a little tweaking of the settings.</p>
 						</li>
 						<li>
 							<strong>Looking to the Future....</strong>
-							<p>Future iterations of this plugin may include features such as the ability to slide up/down instead of left/right and more! Please feel free to <a href="https://github.com/phpwes/Split-Slider/issues">suggest some features</a>!</p>
-						</li>
-					</ul>
-				</li>
-				<li><span class="title">Extras</span>: (<a href="#" class="expand-list">Expand</a>)
-					<ul>
-						<li>
-							<strong>Programmatically Slide Left/Right</strong>
-							<p>If you have defined the Slider as in the first example, you can now reference <code>mySlider</code> with a limited selection of functions. This includes the ability to programmatically "click" the left and right arrows.</p>
-							<pre>mySlider.slideLeft();		// Simulates clicking the "Left" arrow.
-mySlider.slideRight();		// Simulates clicking the "Right" arrow.</pre>
-						</li>
-						<li>
-							<strong>Enabling Auto-Slide (after page load)</strong>
-							<p>When we were looking to add the Auto-Slide function to this plugin, we determined that you should not only be able to slide left or right programmatically, but you should also be able to enable and disable Auto-Slide. This uses the slider variable defined when calling the Slider initially, as above.</p>
-							<pre>	// These both start Auto-Slide, if it's not activate already.
-mySlider.autoSlide();
-mySlider.autoSlide(true);
-
-	// And this turns it off.
-mySlider.autoSlide(false);</pre>
+							<p>Future iterations of this plugin are being looked into, but we don't have many suggestions in line currently. Please feel free to <a href="https://github.com/wesrich/Feed-Rotator/issues">suggest some features</a>!</p>
 						</li>
 					</ul>
 				</li>
